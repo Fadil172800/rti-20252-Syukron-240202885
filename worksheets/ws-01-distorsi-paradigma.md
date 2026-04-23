@@ -61,25 +61,26 @@ Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasi
 ## Template A.1 — Research Mindset Self-Assessment
 
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Syukron Nur Fadillah
+Tanggal          : 23 April 2026
 
-1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: ____________________
-   - Data yang dibutuhkan untuk verifikasi: ____________________
+1. Ketika membaca klaim "model CNN + transfer learning meningkatkan akurasi menjadi 73%":
+   - Pertanyaan pertama saya: Apakah peningkatan akurasi tersebut benar-benar berasal dari metode transfer learning, atau dipengaruhi oleh faktor lain seperti kualitas dataset, preprocessing, atau pembagian data?
+   - Data yang dibutuhkan untuk verifikasi: Detail dataset (jumlah, distribusi kelas), confusion matrix, metode split data (train/validation/test), arsitektur model, serta perbandingan eksperimen yang adil.
+
 
 2. Posisi paradigma:
-   - Pendekatan: [ ] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
-   - Alasan: ____________________
+   - Pendekatan: [✓ ] Positivis  [ ] Interpretivis  [✓ ] Design Science  [ ] Mixed
+   - Alasan: Penelitian menguji performa model CNN secara kuantitatif (positivis) serta membangun artefak berupa model klasifikasi berbasis MobileNetV2 (design science).
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: ____________________
-   - Sumber bias potensial: ____________________
-   - Langkah mitigasi: ____________________
+   - Asumsi tersembunyi: Dataset bunga hasil crawling dianggap merepresentasikan kondisi nyata di lapangan.
+   - Sumber bias potensial: Dataset kecil (2137 citra), kemungkinan ketidakseimbangan kelas, serta data hasil crawling yang tidak terstandarisasi.
+   - Langkah mitigasi: Menggunakan dataset tambahan, validasi silang, serta evaluasi pada data real-world (bukan hanya dataset uji internal).
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: ____________________
-   - Batasan yang diakui sejak awal: ____________________
+   - Data yang tidak akan dimanipulasi: Seluruh hasil akurasi, termasuk jika model tanpa transfer learning memiliki performa rendah.
+   - Batasan yang diakui sejak awal: Dataset terbatas dan mungkin tidak mewakili seluruh variasi bunga di Indonesia.
 ```
 
 ---
@@ -93,25 +94,25 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 > **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
 
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
-> Sumber/Link DOI: _____________________________________
+> Judul: Klasifikasi Citra Spesies Bunga di Indonesia Berbasis CNN dengan Transfer Learning
+> Penulis (Tahun): Arif Rahman, Mansyur Salim, Imam Riadi (2023)
+> Sumber/Link DOI: Jurnal Software Engineering and Computational Intelligence/ https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
 
-| Tahap | Apa yang Dilakukan | Potensi Distorsi |
-|-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+| Tahap                 | Apa yang Dilakukan                                                       | Potensi Distorsi                                                                            |
+| --------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| Reality → Data        | Mengambil citra bunga dari internet (crawling Bing) sebanyak 2137 gambar | Data tidak terkontrol → berpotensi noisy dan tidak representatif (external validity rendah) |
+| Data → Processing     | Preprocessing: normalisasi dan augmentasi (flip, resize)                 | Augmentasi dapat membuat data terlalu “ideal” dibanding kondisi nyata                       |
+| Processing → Analysis | Training CNN MobileNetV2 dengan dan tanpa transfer learning              | Risiko overfitting karena dataset relatif kecil dan kurang variasi                          |
+| Analysis → Inference  | Membandingkan performa berdasarkan akurasi (73% vs 42%)                  | Hanya menggunakan akurasi → tidak cukup merepresentasikan performa model                    |
+| Inference → Knowledge | Menyimpulkan transfer learning meningkatkan performa secara signifikan   | Over-generalization karena hanya diuji pada satu dataset kecil                              |
 
-**Distorsi paling besar di tahap:** ________________________
 
-**Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
+*Distorsi paling besar di tahap:* Reality → Data (External Validity) Karena dataset berasal dari crawling internet dan jumlahnya terbatas, kemungkinan besar tidak merepresentasikan kondisi nyata (misalnya pencahayaan, sudut kamera, kualitas gambar).https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
 
----
+*Dua distorsi spesifik yang teridentifikasi:*
+1. Dataset hasil crawling tidak terstandarisasi dan bisa mengandung noise
+2. Dataset relatif kecil → model berpotensi overfitting
+
 
 ## Latihan 2 — Analisis Kasus Etika
 
