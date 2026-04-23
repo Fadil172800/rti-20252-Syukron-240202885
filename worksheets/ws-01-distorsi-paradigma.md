@@ -118,31 +118,33 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 
 Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
 
-| Perspektif | Analisis |
-|------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+| Perspektif       | Analisis                                                                                                 |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| Kejujuran ilmiah | Hasil tanpa transfer learning (akurasi lebih rendah) tetap harus dilaporkan secara lengkap               |
+| Transparansi     | Peneliti harus menjelaskan keterbatasan dataset yang berasal dari crawling                               |
+| Peer review      | Reviewer kemungkinan mempertanyakan validitas dan generalisasi jika hanya menggunakan satu dataset kecil |
 
-**Keputusan akhir dan justifikasi:**
-> ___________________________________________________
+
+*Keputusan akhir dan justifikasi:*
+> Data tidak boleh dimanipulasi untuk meningkatkan hasil. Dalam konteks jurnal ini, perbandingan antara model dengan dan tanpa transfer learning sudah benar dilakukan. Namun, peneliti tetap harus transparan bahwa peningkatan akurasi bisa dipengaruhi oleh keterbatasan dataset, bukan hanya keunggulan metode.
 
 ---
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+*Topik riset:* Topik riset: Klasifikasi citra bunga menggunakan CNN + Transfer Learning
 
-> **Skala 1–5:** 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
+> *Skala 1–5:* 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
 
-| Kriteria | Positivis | Interpretivis | Design Science |
-|----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4 — topik kuantitatif, cocok uji hipotesis* | *Contoh: 2 — topik tidak studi makna/konteks* | *Contoh: 5 — membangun artefak untuk uji klaim* |
-| Jenis data yang dikumpulkan | *Metrik numerik, log eksperimen* | *Wawancara, observasi kualitatif* | *Hasil uji artefak, komparasi kinerja* |
-| Limitasi paradigma | | | |
+| Kriteria                      | Positivis                                   | Interpretivis                            | Design Science                          |
+| ----------------------------- | ------------------------------------------- | ---------------------------------------- | --------------------------------------- |
+| Kesesuaian dengan topik (1–5) | 5 — fokus pada pengujian performa model     | 1 — tidak melibatkan analisis kualitatif | 5 — membangun model CNN sebagai artefak |
+| Jenis data yang dikumpulkan   | Data numerik (akurasi, loss, dataset citra) | Tidak digunakan                          | Output model dan performa sistem        |
+| Limitasi paradigma            | Bergantung pada kualitas dataset            | Tidak relevan untuk masalah teknis       | Model berpotensi overfit                |
 
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+
+*Paradigma yang dipilih:* Positivis + Design Science
+*Alasan:* Penelitian ini menguji performa model secara kuantitatif (positivis) sekaligus membangun artefak berupa model CNN berbasis MobileNetV2 dengan transfer learning (design science).https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
 
 ---
 
@@ -151,5 +153,5 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Sebelumnya, saya cenderung menerima klaim akurasi tinggi seperti 73% pada model CNN dengan transfer learning tanpa mempertanyakan konteksnya. Setelah memahami konsep distorsi dalam Research Trust Model, saya menyadari bahwa angka tersebut bisa dipengaruhi oleh banyak faktor seperti pemilihan dataset, preprocessing, dan metode evaluasi.
+> Sekarang, saya akan mempertanyakan apakah dataset yang digunakan representatif terhadap kondisi nyata, apakah terdapat bias dalam preprocessing seperti augmentasi atau penghapusan data tertentu, serta apakah hasil tersebut dapat digeneralisasi ke data lain. Saya juga lebih kritis terhadap klaim performa tinggi dan tidak langsung menganggapnya sebagai bukti keunggulan metode.
