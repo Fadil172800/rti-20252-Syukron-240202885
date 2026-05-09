@@ -64,23 +64,22 @@ Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasi
 Nama Peneliti    : Syukron Nur Fadillah
 Tanggal          : 23 April 2026
 
-1. Ketika membaca klaim "model CNN + transfer learning meningkatkan akurasi menjadi 73%":
-   - Pertanyaan pertama saya: Apakah peningkatan akurasi tersebut benar-benar berasal dari metode transfer learning, atau dipengaruhi oleh faktor lain seperti kualitas dataset, preprocessing, atau pembagian data?
-   - Data yang dibutuhkan untuk verifikasi: Detail dataset (jumlah, distribusi kelas), confusion matrix, metode split data (train/validation/test), arsitektur model, serta perbandingan eksperimen yang adil.
-
+1. Ketika membaca klaim "EfficientNet-B6 meningkatkan akurasi terbaik hingga 77.05%":
+   - Pertanyaan pertama saya: Apakah performa 77.05% ini konsisten di setiap fold pengujian, atau hanya lonjakan acak (cherry-picked) akibat bias pembagian dataset yang tidak seimbang?
+   - Data yang dibutuhkan untuk verifikasi: Laporan performa rata-rata dari seluruh 5-Fold Cross Validation, nilai standar deviasi akurasi, serta confusion matrix untuk melihat sebaran salah klasifikasi.
 
 2. Posisi paradigma:
-   - Pendekatan: [✓ ] Positivis  [ ] Interpretivis  [✓ ] Design Science  [ ] Mixed
-   - Alasan: Penelitian menguji performa model CNN secara kuantitatif (positivis) serta membangun artefak berupa model klasifikasi berbasis MobileNetV2 (design science).
+   - Pendekatan: [✓] Positivis  [ ] Interpretivis  [✓] Design Science  [ ] Mixed
+   - Alasan: Penelitian ini membangun artefak teknologi berupa model klasifikasi deep learning (Design Science) dan menguji kinerjanya secara objektif melalui metrik matematis kuantitatif (Positivis).
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: Dataset bunga hasil crawling dianggap merepresentasikan kondisi nyata di lapangan.
-   - Sumber bias potensial: Dataset kecil (2137 citra), kemungkinan ketidakseimbangan kelas, serta data hasil crawling yang tidak terstandarisasi.
-   - Langkah mitigasi: Menggunakan dataset tambahan, validasi silang, serta evaluasi pada data real-world (bukan hanya dataset uji internal).
+   - Asumsi tersembunyi: Dataset sekunder (Kaggle) dengan latar belakang seragam dianggap mewakili variasi visual riil daun padi di area persawahan terbuka.
+   - Sumber bias potensial: Ketidakseimbangan data (imbalanced class) di mana jumlah citra daun sehat jauh mendominasi dibanding citra daun sakit.
+   - Langkah mitigasi: Melakukan evaluasi performa menggunakan metrik F1-Score dan AUC (bukan hanya akurasi) serta menerapkan teknik penyeimbangan data.
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: Seluruh hasil akurasi, termasuk jika model tanpa transfer learning memiliki performa rendah.
-   - Batasan yang diakui sejak awal: Dataset terbatas dan mungkin tidak mewakili seluruh variasi bunga di Indonesia.
+   - Data yang tidak akan dimanipulasi: Hasil akurasi dari setiap fold pengujian, termasuk fold dengan performa rendah (seperti fold 2 yang hanya berkisar ~71%).
+   - Batasan yang diakui sejak awal: Ketergantungan penuh pada dataset sekunder terkurasi dan keterbatasan fungsional model yang hanya mendeteksi 3 jenis penyakit spesifik.
 ```
 
 ---
@@ -94,64 +93,71 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 > **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
 
 **Paper yang dipilih:**
-> Judul: Klasifikasi Citra Spesies Bunga di Indonesia Berbasis CNN dengan Transfer Learning
-> Penulis (Tahun): Arif Rahman, Mansyur Salim, Imam Riadi (2023)
-> Sumber/Link DOI: Jurnal Software Engineering and Computational Intelligence/ https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
+> Judul: Klasifikasi Penyakit Daun Padi Menggunakan Model Deep Learning EfficientNet-B6
+> Penulis (Tahun): Amanda Caecilia Milano, Achmad Yasid, Rima Tri Wahyuningrum (2024)
+> Sumber/Link DOI: JITET (Jurnal Informatika dan Teknik Elektro Terapan) / http://dx.doi.org/10.23960/jitet.v12i1.3855
 
 | Tahap                 | Apa yang Dilakukan                                                       | Potensi Distorsi                                                                            |
 | --------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| Reality → Data        | Mengambil citra bunga dari internet (crawling Bing) sebanyak 2137 gambar | Data tidak terkontrol → berpotensi noisy dan tidak representatif (external validity rendah) |
-| Data → Processing     | Preprocessing: normalisasi dan augmentasi (flip, resize)                 | Augmentasi dapat membuat data terlalu “ideal” dibanding kondisi nyata                       |
-| Processing → Analysis | Training CNN MobileNetV2 dengan dan tanpa transfer learning              | Risiko overfitting karena dataset relatif kecil dan kurang variasi                          |
-| Analysis → Inference  | Membandingkan performa berdasarkan akurasi (73% vs 42%)                  | Hanya menggunakan akurasi → tidak cukup merepresentasikan performa model                    |
-| Inference → Knowledge | Menyimpulkan transfer learning meningkatkan performa secara signifikan   | Over-generalization karena hanya diuji pada satu dataset kecil                              |
+| Reality → Data        | Mengambil dataset sekunder "Rice Leafs" dari Kaggle dengan total 3.355 citra (1.488 Healthy, 779 LeafBlast, 565 Hispa, dan 523 BrownSpot) | Distorsi Seleksi & Representasi: Dataset tidak seimbang secara alami (imbalanced). Distribusi kelas sehat terlalu mendominasi. Foto di Kaggle cenderung bersih dengan background seragam, sehingga kurang merepresentasikan realitas di sawah terbuka (masalah pencahayaan, debu, bayangan) |
+| Data → Processing     | Melakukan penyamaan ukuran (resize) citra input menjadi 224 X 224 piksel dan 528 X 528 piksel, serta memisahkan data dengan stratified 5-Fold Cross Validation           | Distorsi Resolusi Informasi: Proses resizing ekstrem dari gambar asli beresolusi tinggi ke ukuran sekecil 224 X 224 berpotensi menghilangkan detail bercak penyakit yang sangat halus (misalnya titik-titik kecil Brown Spot)                      |
+| Processing → Analysis | Melatih model EfficientNet-B6 menggunakan variasi parameter size input (224 vs 528) dan jumlah epoch (25 vs 50).              | Distorsi Komparasi/Parameter Bias: Paper ini langsung menggunakan EfficientNet-B6 tanpa melakukan komparasi langsung secara eksperimental dengan arsitektur lain (seperti ResNet atau MobileNet) pada dataset yang sama untuk membuktikan klaim "keunggulan efisiensinya" di kasus ini.                         |
+| Analysis → Inference  | Menyajikan hasil uji coba di mana skenario ukuran input 224 dengan 50 epoch pada fold ke-5 memberikan akurasi tertinggi sebesar 77.05%                  | Distorsi Cherry-Picking: Menyoroti performa fold terbaik (77.05%) sebagai hasil utama, alih-alih berfokus pada performa rata-rata keseluruhan fold yang mencerminkan stabilitas model yang sebenarnya di lingkungan acak                    |
+| Inference → Knowledge | Menyimpulkan bahwa metode Deep Learning dengan arsitektur EfficientNet-B6 sangat optimal untuk klasifikasi penyakit tanaman padi   | Over-generalization: Klaim performa optimal ditarik hanya berdasarkan pengujian pada satu sumber dataset laboratorium (Kaggle). Model belum diuji pada dataset eksternal independen untuk membuktikan generalisasinya                              |
 
 
-*Distorsi paling besar di tahap:* Reality → Data (External Validity) Karena dataset berasal dari crawling internet dan jumlahnya terbatas, kemungkinan besar tidak merepresentasikan kondisi nyata (misalnya pencahayaan, sudut kamera, kualitas gambar).https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
+Distorsi paling besar terjadi di tahap: Reality → Data (External Validity)
 
-*Dua distorsi spesifik yang teridentifikasi:*
-1. Dataset hasil crawling tidak terstandarisasi dan bisa mengandung noise
-2. Dataset relatif kecil → model berpotensi overfitting
+Justifikasi: Dataset yang digunakan berasal dari Kaggle yang dikondisikan (controlled environment). Di dunia nyata, daun padi bergoyang karena angin, memiliki bayangan dari daun lain, terkena pantulan sinar matahari terik, atau tertutup lumpur kering. Model yang mencapai akurasi ~77% pada data Kaggle ini kemungkinan besar akan mengalami penurunan performa drastis jika digunakan oleh petani di sawah secara langsung menggunakan kamera smartphone kelas menengah.
+
+Dua distorsi spesifik yang teridentifikasi:
+
+1.Class Imbalance Bias: Kelas daun sehat (Healthy) jauh lebih banyak daripada kelas berpenyakit. Metrik akurasi tinggi bisa terdistorsi akibat model sangat mahir menebak daun sehat, namun buruk dalam mendeteksi bercak penyakit yang krusial.
+
+2.Resolution Downscaling Distortion: Pengurangan ukuran resolusi gambar secara drastis demi menghemat komputasi berisiko melenyapkan tekstur tepi bercak Leaf Blast atau pola garis halus Hispa yang merupakan fitur pembeda utama.
 
 
 ## Latihan 2 — Analisis Kasus Etika
 
 Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, hasil eksperimennya menjadi signifikan. Dengan outlier, hasilnya tidak signifikan.
 
+
 | Perspektif       | Analisis                                                                                                 |
 | ---------------- | -------------------------------------------------------------------------------------------------------- |
-| Kejujuran ilmiah | Hasil tanpa transfer learning (akurasi lebih rendah) tetap harus dilaporkan secara lengkap               |
-| Transparansi     | Peneliti harus menjelaskan keterbatasan dataset yang berasal dari crawling                               |
-| Peer review      | Reviewer kemungkinan mempertanyakan validitas dan generalisasi jika hanya menggunakan satu dataset kecil |
+| Kejujuran ilmiah | Peneliti wajib melaporkan seluruh metrik kinerja apa adanya. Misalnya, dalam paper ini, meskipun akurasi tertingginya 77.05% pada fold ke-5, peneliti secara jujur menyajikan tabel fold lain yang memiliki performa lebih rendah (misalnya fold ke-2 yang hanya mendapat akurasi 71.39%). Peneliti tidak menyembunyikan variabilitas performa model tersebut             |
+| Transparansi     | Peneliti harus membeberkan batasan sistem, seperti kenyataan bahwa model ini dilatih menggunakan skenario parameter tertentu, dan mengakui keterbatasan fungsionalitas model yang kinerjanya sangat bergantung pada variasi ukuran input dan epoch                              |
+| Peer review      | Penilai (reviewer) akan mengevaluasi kejujuran metodologi. Jika peneliti menghapus citra daun tertentu hanya karena model salah mengklasifikasikannya (agar akurasi terlihat naik dari 77% ke 85%), tindakan manipulasi ini akan merusak reproduksibilitas riset dan menyesatkan komunitas ilmiah pertanian |
 
 
 *Keputusan akhir dan justifikasi:*
-> Data tidak boleh dimanipulasi untuk meningkatkan hasil. Dalam konteks jurnal ini, perbandingan antara model dengan dan tanpa transfer learning sudah benar dilakukan. Namun, peneliti tetap harus transparan bahwa peningkatan akurasi bisa dipengaruhi oleh keterbatasan dataset, bukan hanya keunggulan metode.
+> Outlier atau data "sulit" (seperti citra daun padi dengan bercak ganda atau pencahayaan buruk) tidak boleh dihapus tanpa landasan ilmiah yang valid dan terdokumentasi (misalnya gambar tersebut memang rusak secara fisik/korup). Justifikasi penghapusan harus tertulis secara transparan di bagian metodologi. Jika tidak, hasil riset tersebut menjadi semu dan gagal ketika diimplementasikan pada aplikasi nyata petani di lapangan.
 
 ---
 
 ## Latihan 3 — Posisi Paradigma
 
-*Topik riset:* Topik riset: Klasifikasi citra bunga menggunakan CNN + Transfer Learning
+*Topik riset:* Topik riset: Klasifikasi penyakit daun padi menggunakan model deep learning EfficientNet-B6.
 
 > *Skala 1–5:* 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
 
 | Kriteria                      | Positivis                                   | Interpretivis                            | Design Science                          |
 | ----------------------------- | ------------------------------------------- | ---------------------------------------- | --------------------------------------- |
-| Kesesuaian dengan topik (1–5) | 5 — fokus pada pengujian performa model     | 1 — tidak melibatkan analisis kualitatif | 5 — membangun model CNN sebagai artefak |
-| Jenis data yang dikumpulkan   | Data numerik (akurasi, loss, dataset citra) | Tidak digunakan                          | Output model dan performa sistem        |
-| Limitasi paradigma            | Bergantung pada kualitas dataset            | Tidak relevan untuk masalah teknis       | Model berpotensi overfit                |
+| Kesesuaian dengan topik (1–5) | 5 (Sangat Sesuai)     | 1 (Tidak Sesuai) | 5 (Sangat Sesuai) |
+| Jenis data yang dikumpulkan   | Data numerik kuantitatif berupa akurasi (%), presisi, recall, F1-score, dan luas kurva AUC | Tidak digunakan                          | Artefak berupa arsitektur model klasifikasi dan parameter konfigurasi pelatihan       |
+| Limitasi paradigma            | Sangat bergantung pada data historis numerik; gagal menangani faktor kualitatif di lapangan          | TTidak menghasilkan solusi teknis operasional yang presisi untuk klasifikasi citra       | Terlalu fokus pada optimasi fungsional artefak (kecepatan/akurasi), kadang mengabaikan kepraktisan penggunaannya oleh pengguna akhir                |
 
 
-*Paradigma yang dipilih:* Positivis + Design Science
-*Alasan:* Penelitian ini menguji performa model secara kuantitatif (positivis) sekaligus membangun artefak berupa model CNN berbasis MobileNetV2 dengan transfer learning (design science).https://ejournal.uigm.ac.id/index.php/JSECI/article/view/4942
+Paradigma yang dipilih: Positivis + Design Science Research (DSR)
+
+Alasan: Penelitian ini mengikuti kerangka kerja DSR dengan menciptakan solusi berupa artefak teknologi (model klasifikasi penyakit tanaman berbasis EfficientNet-B6) untuk memecahkan masalah praktis pertanian. Kinerja dari artefak tersebut kemudian diuji dan divalidasi secara ketat menggunakan paradigma Positivis melalui metode eksperimen kuantitatif (K-Fold Cross Validation dan matriks evaluasi statistik) untuk mendapatkan kebenaran objektif yang terukur.https://journal.eng.unila.ac.id/index.php/jitet/article/view/3855
 
 ---
 
 ## Refleksi
 
-> Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
+> Pertanyaan Refleksi: Sebelum membaca materi ini, apakah Anda pernah mempertanyakan klaim "akurasi tinggi"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan Anda ajukan saat membaca paper klasifikasi citra berbasis deep learning?
 
 **Jawaban:**
-> Sebelumnya, saya cenderung menerima klaim akurasi tinggi seperti 73% pada model CNN dengan transfer learning tanpa mempertanyakan konteksnya. Setelah memahami konsep distorsi dalam Research Trust Model, saya menyadari bahwa angka tersebut bisa dipengaruhi oleh banyak faktor seperti pemilihan dataset, preprocessing, dan metode evaluasi.
-> Sekarang, saya akan mempertanyakan apakah dataset yang digunakan representatif terhadap kondisi nyata, apakah terdapat bias dalam preprocessing seperti augmentasi atau penghapusan data tertentu, serta apakah hasil tersebut dapat digeneralisasi ke data lain. Saya juga lebih kritis terhadap klaim performa tinggi dan tidak langsung menganggapnya sebagai bukti keunggulan metode.
+Sebelum memahami metodologi penelitian IT secara mendalam, saya sering kali terpukau dengan klaim akurasi tinggi tanpa melihat proses di baliknya. Kini, setelah memahami Research Trust Model dan rantai distorsinya, saya menyadari bahwa angka akurasi (bahkan yang setinggi 77% atau lebih) dapat dengan mudah bias.
+
+Saat membaca paper bertopik sejenis di masa depan, pertanyaan kritis pertama saya adalah: "Apakah pembagian data pelatihan dan pengujian benar-benar bersih?" (mencegah data leakage akibat augmentasi sebelum pemisahan data). Pertanyaan kedua adalah: "Bagaimana performa model pada kelas minoritas?" (memastikan model tidak mengalami bias akibat kelas mayoritas). Dan yang terpenting: "Apakah model ini pernah diuji pada dataset yang sepenuhnya berbeda dari dataset pelatihannya untuk membuktikan validitas eksternalnya?"
