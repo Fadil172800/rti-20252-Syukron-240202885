@@ -10,15 +10,6 @@
 
 Literature review bukan merangkum paper satu per satu. Pendekatan yang benar adalah **concept-centric** — organisasi berdasarkan tema, metode, atau variabel. Tujuan: menemukan **pola, kontradiksi, dan gap**.
 
-**Perbandingan pendekatan Author-centric vs Concept-centric:**
-
-| Aspek | Author-centric (Hindari) | Concept-centric (Gunakan) |
-|-------|--------------------------|---------------------------|
-| Struktur | Per penulis/paper ("Rahman et al. menyatakan...") | Per konsep/metode ("Pendekatan berbasis transformer") |
-| Tujuan | Ringkasan isi paper | Perbandingan metode & identifikasi gap |
-| Contoh paragraph | "Rahman (2023) pakai CNN. Lee (2022) pakai LSTM. Zhang (2021) pakai RF." | "Tiga pendekatan dominan: CNN digunakan oleh 4 paper untuk representasi fitur visual; LSTM untuk data sekuensial; RF sebagai baseline klasik." |
-| Hasil akhir | Daftar paper | Peta pengetahuan + gap yang teridentifikasi |
-
 ### Empat Jenis Research Gap
 
 | Jenis Gap | Deskripsi | Contoh |
@@ -32,16 +23,9 @@ Gap terkuat = kombinasi 2+ jenis.
 
 ### Systematic Search Strategy
 
-1. **Database utama**: IEEE Xplore, ACM DL, Scopus
-   - Akses IEEE/ACM melalui jaringan kampus atau VPN institusi
-   - Alternatif bebas biaya: Google Scholar, ResearchGate ([researchgate.net](https://www.researchgate.net)), arXiv ([arxiv.org](https://arxiv.org))
+1. **Database**: IEEE Xplore, ACM DL, Scopus, Google Scholar
 2. **Boolean query** yang terdokumentasi eksplisit
-   - Contoh: `("anomaly detection" OR "intrusion detection") AND ("deep learning" OR "neural network") NOT ("medical imaging")`
-   - Gunakan tanda kutip untuk frasa eksak; AND/OR/NOT mengontrol scope
-3. **Snowballing** — dua arah:
-   - **Backward snowballing**: buka daftar referensi di paper kunci → telusuri paper yang dikutip
-   - **Forward snowballing**: di Google Scholar, klik "Cited by" di bawah paper kunci → temukan paper yang mengutipnya
-   - Ulangi 1–2 tingkat untuk membangun cakupan komprehensif
+3. **Snowballing**: backward (telusuri referensi) + forward (cari yang mengutip)
 4. Klaim "belum ada penelitian" harus didukung **bukti pencarian**
 
 ### Baseline Selection — 3 Kriteria
@@ -118,17 +102,13 @@ Membandingkan deep learning 2024 dengan decision tree sederhana tanpa justifikas
 |----------|-----------|---------------|--------|
 | CNN Standar | Digunakan untuk klasifikasi citra daun padi | Banyak dipakai pada penelitian sebelumnya | Yuliany et al. (2022) |
 | EfficientNet-B6 | Digunakan pada klasifikasi penyakit daun padi | Termasuk metode modern dengan performa tinggi | Amanda et al. (2024) |
+```
+
+---
 
 ---
 
 ## Latihan 1 — Concept-Centric Literature Table
-
-Gunakan topik riset dari WS-02. Cari minimal 5 paper relevan menggunakan database akademik.
-
-> **Panduan pencarian:**
-> - Database: IEEE Xplore, ACM DL, Google Scholar, atau ResearchGate
-> - Tulis query Boolean yang digunakan: contoh `("object detection" OR "image classification") AND ("edge computing") NOT ("medical")`. Dokumentasikan query secara eksplisit.
-> - Akses gratis: buka Google Scholar → cari judul paper → klik [PDF] jika tersedia, atau akses lewat campus VPN
 
 Topik riset: Klasifikasi Penyakit Daun Padi Menggunakan Deep Learning EfficientNet-B6.
 Query pencarian: ("rice leaf disease" OR "plant disease classification") AND ("CNN" OR "EfficientNet")
@@ -148,11 +128,10 @@ CNN dan EfficientNet mendominasi penelitian klasifikasi citra daun tanaman.
 
 Limitasi yang berulang:
 Akurasi model masih belum stabil dan dataset yang digunakan masih terbatas.
+
 ---
 
 ## Latihan 2 — Gap Identification
-
-Berdasarkan tabel di Latihan 1, identifikasi gap.
 
 | Jenis Gap       | Ditemukan?         | Gap Statement                                                                |
 | --------------- | ------------------ | ---------------------------------------------------------------------------- |
@@ -161,32 +140,29 @@ Berdasarkan tabel di Latihan 1, identifikasi gap.
 | Data Gap        | [X] Ya / [ ] Tidak | Dataset masih terbatas dan jumlah kelas penyakit sedikit.                    |
 | Context Gap     | [X] Ya / [ ] Tidak | Belum banyak penelitian pada kondisi pertanian Indonesia secara luas.        |
 
-
 Gap utama yang dipilih: Performance Gap dan Method Gap.
 
 Mengapa gap ini penting?
 
 Karena hasil klasifikasi yang kurang akurat dapat menyebabkan kesalahan diagnosis penyakit tanaman padi. Jika metode yang lebih baik digunakan, maka petani dapat melakukan penanganan lebih cepat dan tepat.
+
 ---
 
 ## Latihan 3 — Baseline Selection
-
-Pilih 2 baseline dari literatur yang sudah dibaca.
 
 | # | Baseline        | Mengapa Relevan                                       | Mengapa Representatif                         | Apakah SOTA? | Sumber               |
 | - | --------------- | ----------------------------------------------------- | --------------------------------------------- | ------------ | -------------------- |
 | 1 | CNN Standar     | Sama-sama digunakan untuk klasifikasi citra daun padi | Metode umum pada penelitian sebelumnya        | Tidak        | Yuliany et al., 2022 |
 | 2 | EfficientNet-B6 | Digunakan pada klasifikasi penyakit daun tanaman      | Memiliki performa tinggi dibanding model lain | Ya           | Amanda et al., 2024  |
 
-
-**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [X] Tidak
-> Justifikasi: Justifikasi: Baseline dipilih secara adil karena menggunakan metode yang benar-benar relevan dan umum digunakan dalam penelitian klasifikasi citra daun tanaman.
-
 ---
+
 
 ## Refleksi
 
-> Apa perbedaan antara "belum ada yang meneliti ini" (klaim tanpa bukti) dengan research gap yang valid? Bagaimana cara membuktikan bahwa sebuah gap benar-benar ada?
+**Apakah pemilihan baseline ini bisa dianggap straw man?** [ ] Ya / [X] Tidak
+>Justifikasi: Baseline dipilih secara adil karena menggunakan metode yang benar-benar relevan dan umum digunakan dalam penelitian klasifikasi citra daun tanaman.
+
 
 **Jawaban:**
->Klaim “belum ada yang meneliti ini” tanpa bukti hanyalah asumsi biasa. Sedangkan research gap yang valid harus dibuktikan dengan membaca dan membandingkan beberapa penelitian sebelumnya. Gap dapat ditemukan jika terdapat kekurangan yang terus muncul, seperti akurasi rendah, metode yang belum digunakan, atau dataset yang terbatas.
+> Klaim “belum ada yang meneliti ini” tanpa bukti hanyalah asumsi biasa. Sedangkan research gap yang valid harus dibuktikan dengan membaca dan membandingkan beberapa penelitian sebelumnya. Gap dapat ditemukan jika terdapat kekurangan yang terus muncul, seperti akurasi rendah, metode yang belum digunakan, atau dataset yang terbatas.
