@@ -109,53 +109,63 @@ Kumpulkan hasil dari WS-02 sampai WS-07 menjadi satu ringkasan proposal.
 
 | Komponen | Sumber | Isi (1-2 kalimat) |
 |----------|--------|-------------------|
-| Problem Statement | WS-02 | *Contoh: Sistem rekomendasi memiliki akurasi tinggi (RMSE 0.87) tetapi satisfaction score rendah (45/100). Gap antara metrik teknis dan kepuasan pengguna belum diteliti.* |
-| Gap | WS-03 | *Contoh: Tidak ada studi yang mengintegrasikan collaborative filtering dengan user-context signals untuk meningkatkan satisfaction.* |
-| RQ | WS-04 | *Contoh: Apakah penambahan context-aware signals pada collaborative filtering meningkatkan satisfaction score tanpa menurunkan RMSE?* |
-| Hipotesis | WS-04 | *Contoh: H₁: Sistem CF+context menghasilkan satisfaction ≥ 70/100 dengan RMSE ≤ 0.90 dibanding baseline CF murni.* |
-| Variabel & Metrik | WS-05 | *Contoh: IV = jenis sistem (CF vs CF+context); DV = satisfaction score (skala 0-100) + RMSE (regresi).* |
-| Sistem | WS-06 | |
-| Desain Eksperimen | WS-07 | |
+| **Problem Statement** | WS-02 | Identifikasi penyakit daun padi secara manual masih membutuhkan waktu yang relatif lama dan berpotensi menimbulkan kesalahan diagnosis sehingga diperlukan sistem klasifikasi otomatis berbasis Deep Learning. |
+| **Gap** | WS-03 | Penelitian sebelumnya menunjukkan bahwa EfficientNet-B6 memiliki performa yang baik, namun evaluasi terhadap pengaruh variasi ukuran input citra (224×224 dan 528×528) serta jumlah epoch (25 dan 50) terhadap performa model masih terbatas. |
+| **Research Question** | WS-04 | Bagaimana pengaruh variasi ukuran input citra (224×224 dan 528×528) serta jumlah epoch (25 dan 50) terhadap performa model EfficientNet-B6 dalam mengklasifikasikan penyakit daun padi? |
+| **Hipotesis** | WS-04 | Variasi ukuran input citra dan jumlah epoch diduga mempengaruhi performa model EfficientNet-B6 berdasarkan nilai Accuracy, Precision, Recall, F1-Score, dan AUC. |
+| **Variabel & Metrik** | WS-05 | Variabel bebas berupa ukuran input citra dan jumlah epoch, sedangkan variabel terikat berupa Accuracy, Precision, Recall, F1-Score, dan AUC sebagai metrik evaluasi model. |
+| **Sistem** | WS-06 | Sistem klasifikasi dibangun menggunakan arsitektur EfficientNet-B6 yang dijalankan pada Google Colab dengan dataset Rice Leafs dan metode validasi 5-Fold Cross Validation. |
+| **Desain Eksperimen** | WS-07 | Penelitian akan menggunakan empat skenario eksperimen berdasarkan kombinasi ukuran input (224×224 dan 528×528) serta jumlah epoch (25 dan 50) untuk menentukan konfigurasi terbaik model EfficientNet-B6. |
 
 ---
 
 ## Latihan 2 — Integration Checklist
 
-Verifikasi 6 koneksi kritis. Isi dengan merujuk tabel di Latihan 1.
+Verifikasi 6 koneksi kritis berdasarkan proposal penelitian.
 
 | Koneksi | Status | Bukti |
 |---------|--------|-------|
-| Problem → Gap | *Contoh: ✅ — gap muncul dari 15 paper Bab 3 yang tidak ada yang mengkombinasikan CF + context untuk satisfaction* | |
-| Gap → RQ | *Contoh: ✅ — RQ langsung menanyakan apakah CF+context meningkatkan satisfaction* | |
-| RQ → Hypothesis | *Contoh: ✅ — H₁ memprediksi satisfaction ≥ 70 dengan threshold RMSE ≤ 0.90* | |
-| Hypothesis → Metric | | |
-| Metric → System | | |
-| System → Experiment | | |
+| Problem → Gap | ✅ | Research gap diperoleh dari hasil analisis penelitian sebelumnya yang menunjukkan masih terbatasnya evaluasi variasi ukuran input dan jumlah epoch pada EfficientNet-B6. |
+| Gap → RQ | ✅ | Research Question disusun secara langsung untuk menjawab research gap mengenai pengaruh variasi parameter terhadap performa model. |
+| RQ → Hypothesis | ✅ | Hipotesis memprediksi bahwa variasi ukuran input citra dan jumlah epoch akan memberikan perbedaan performa pada model EfficientNet-B6. |
+| Hypothesis → Metric | ✅ | Hipotesis diuji menggunakan Accuracy, Precision, Recall, F1-Score, dan AUC sebagai metrik evaluasi. |
+| Metric → System | ✅ | Sistem menghasilkan seluruh metrik evaluasi secara otomatis setelah proses pelatihan dan pengujian model selesai. |
+| System → Experiment | ✅ | Sistem digunakan sebagai instrumen utama dalam empat skenario eksperimen dengan metode 5-Fold Cross Validation. |
 
-**Koneksi mana yang paling lemah?** _______________________
+**Koneksi mana yang paling lemah?**
+
+Belum terdapat koneksi yang benar-benar lemah, namun hubungan antara research gap dan research question masih dapat diperkuat dengan menambahkan referensi penelitian terbaru mengenai pengaruh variasi parameter pelatihan pada EfficientNet.
+
 **Bagaimana cara memperkuatnya?**
-> ___________________________________________________
 
-**Konsistensi horizontal — apakah istilah dan scope konsisten?** [ ] Ya / [ ] Tidak
-> Jika tidak, di bagian mana terjadi inkonsistensi? _________
+> Menambahkan beberapa referensi ilmiah terbaru (2023–2025) yang membahas pengaruh ukuran input citra dan jumlah epoch terhadap performa model EfficientNet sehingga research gap menjadi lebih kuat.
+
+**Konsistensi horizontal — apakah istilah dan scope konsisten?**
+
+**[X] Ya**
+
+Seluruh istilah yang digunakan pada proposal telah konsisten mulai dari rumusan masalah, research question, hipotesis, variabel penelitian, sistem, hingga desain eksperimen.
 
 ---
 
 ## Latihan 3 — Rubrik Self-Assessment
 
-Evaluasi proposal mini menggunakan rubrik.
+Evaluasi proposal menggunakan rubrik berikut.
 
 | Kriteria | Skor (1-3) | Justifikasi |
 |----------|-----------|-------------|
-| Koherensi | *Contoh: 2 — koneksi gap→RQ masih lemah karena gap belum cukup narrow* | |
-| Specificity | *Contoh: 3 — metrik (satisfaction 0-100, RMSE) sudah terdefinisi numerik* | |
-| Feasibility | | |
-| Rigor | | |
+| **Koherensi** | **3** | Alur proposal telah tersusun secara logis mulai dari identifikasi masalah, research gap, research question, hipotesis, metodologi, hingga desain eksperimen. |
+| **Specificity** | **3** | Variabel penelitian, dataset, metode, metrik evaluasi, dan skenario eksperimen telah dijelaskan secara spesifik. |
+| **Feasibility** | **3** | Penelitian dapat dilaksanakan menggunakan Google Colab dan dataset Rice Leafs dengan sumber daya yang tersedia. |
+| **Rigor** | **3** | Penelitian menggunakan metode Deep Learning EfficientNet-B6, validasi 5-Fold Cross Validation, serta metrik evaluasi Accuracy, Precision, Recall, F1-Score, dan AUC. |
 
-**Skor total:** _____ / 12
+**Skor total:** **12 / 12**
 
-**Apakah proposal siap untuk fase eksekusi?** [ ] Ya / [ ] Belum
-> Jika belum, apa yang perlu diperbaiki? __________________
+**Apakah proposal siap untuk fase eksekusi?**
+
+**[X] Ya**
+
+Proposal telah memiliki keterkaitan yang konsisten antara permasalahan, research gap, research question, metodologi, dan desain eksperimen sehingga siap dilanjutkan ke tahap implementasi.
 
 ---
 
@@ -163,8 +173,14 @@ Evaluasi proposal mini menggunakan rubrik.
 
 > Dari seluruh proses WS-01 sampai WS-08, bagian mana yang paling mudah dan paling sulit? Mengapa? Apa yang akan dilakukan berbeda jika mengulang dari awal?
 
-**Bagian termudah:** ____________________________________
-**Bagian tersulit:** ____________________________________
+**Bagian termudah:**
+
+Menganalisis isi jurnal dan menyusun ringkasan setiap bagian karena penelitian acuan telah memiliki struktur yang jelas sehingga memudahkan proses identifikasi masalah dan metode penelitian.
+
+**Bagian tersulit:**
+
+Menentukan research gap dan menjaga konsistensi antara research question, hipotesis, variabel penelitian, serta metodologi karena seluruh komponen harus saling berkaitan dan tidak boleh bertentangan.
+
 **Yang akan dilakukan berbeda:**
-> ___________________________________________________
-> ___________________________________________________
+
+> Jika mengulang dari awal, saya akan melakukan telaah literatur yang lebih luas sebelum menentukan research gap sehingga proposal memiliki dasar teori yang lebih kuat. Selain itu, saya akan menyusun rancangan eksperimen sejak awal agar proses implementasi penelitian dapat berjalan lebih terarah dan efisien.
