@@ -67,120 +67,187 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 
 ---
 
+# WS-09: Implementation & Environment
+
+> **Bab 9 — Implementasi Riset & Kontrol Lingkungan**
+
+---
+
 ## Template A.9 — Dokumentasi Setup Eksperimen
 
-```
+```text
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : ____________________
-  RAM     : ____________________
-  GPU     : ____________________
-  Storage : ____________________
+  CPU     : Intel Xeon (Google Colab Runtime)
+  RAM     : ±12 GB RAM
+  GPU     : NVIDIA Tesla T4 atau GPU yang tersedia pada Google Colab
+  Storage : Google Drive dan Google Colab Storage
 
 Software:
-  OS        : ____________________
-  Runtime   : ____________________
-  Framework : ____________________
+  OS        : Linux (Ubuntu - Google Colab)
+  Runtime   : Python 3.11
+  Framework : TensorFlow 2.x, Keras
 
 Dependencies:
-| Library | Version | Sumber | Hash/Checksum |
-|---------|---------|--------|---------------|
-|         |         |        |               |
-|         |         |        |               |
+
+| Library        | Version | Sumber         | Hash/Checksum |
+|----------------|---------|----------------|---------------|
+| Python         | 3.11    | Google Colab   | Akan dibuat pada requirements.txt |
+| TensorFlow     | 2.x     | pip            | Akan dibuat pada requirements.txt |
+| NumPy          | 1.x     | pip            | Akan dibuat pada requirements.txt |
+| Pandas         | 2.x     | pip            | Akan dibuat pada requirements.txt |
+| Scikit-learn   | 1.x     | pip            | Akan dibuat pada requirements.txt |
+| Matplotlib     | 3.x     | pip            | Akan dibuat pada requirements.txt |
 
 Konfigurasi:
-  Config file     : ____________________
-  Random seed     : ____________________
-  Hyperparameters : ____________________
+
+  Config file     : config.ipynb (Google Colab Notebook)
+  Random seed     : 42
+  Hyperparameters :
+    - Model            : EfficientNet-B6
+    - Input Size       : 224×224 dan 528×528
+    - Epoch            : 25 dan 50
+    - Optimizer        : Adam
+    - Batch Size       : 32
+    - Validation       : 5-Fold Cross Validation
 
 Reproducibility Check:
-  [ ] Dependency terdokumentasi (requirements.txt / lock file)
-  [ ] Seed ditetapkan di semua level (Python, NumPy, framework)
-  [ ] Config di version control
-  [ ] README instruksi reproduksi lengkap
+
+  [x] Dependency akan didokumentasikan dalam requirements.txt / lock file
+  [x] Random seed direncanakan ditetapkan pada Python, NumPy, dan TensorFlow
+  [x] Config eksperimen akan disimpan pada repository GitHub
+  [x] README akan dilengkapi sebagai panduan reproduksi penelitian
 ```
 
 ---
 
 ## Latihan 1 — Environment Specification
 
-Dokumentasikan environment untuk eksperimen Anda (boleh environment saat ini atau yang direncanakan).
+Dokumentasikan environment yang direncanakan untuk eksperimen.
 
-| Komponen | Spesifikasi |
-|----------|------------|
-| CPU | *Contoh: Intel Core i7-12700H, 14 Core* |
-| RAM | *Contoh: 32 GB DDR5* |
-| GPU | *Contoh: NVIDIA RTX 3060 6GB / CPU-only jika tidak ada GPU* |
-| OS | *Contoh: Ubuntu 22.04 LTS / Windows 11* |
-| Runtime | |
-| Framework | |
-| Random Seed | |
+| Komponen    | Spesifikasi                                              |
+| ----------- | -------------------------------------------------------- |
+| CPU         | Intel Xeon (Google Colab Runtime)                        |
+| RAM         | ±12 GB RAM                                               |
+| GPU         | NVIDIA Tesla T4 atau GPU yang tersedia pada Google Colab |
+| OS          | Linux (Ubuntu - Google Colab)                            |
+| Runtime     | Python 3.11                                              |
+| Framework   | TensorFlow 2.x dan Keras                                 |
+| Random Seed | 42                                                       |
 
-**Dependencies (minimal 5):**
+### Dependencies
 
-| Library | Version | Alasan Dibutuhkan |
-|---------|---------|-------------------|
-| *Contoh: scikit-learn* | *1.3.2* | *Klasifikasi + evaluasi metrik* |
-| | | |
-| | | |
-| | | |
-| | | |
+| Library      | Version | Alasan Dibutuhkan                                          |
+| ------------ | ------- | ---------------------------------------------------------- |
+| Python       | 3.11    | Bahasa pemrograman utama                                   |
+| TensorFlow   | 2.x     | Implementasi model EfficientNet-B6                         |
+| NumPy        | 1.x     | Operasi numerik                                            |
+| Pandas       | 2.x     | Pengolahan dataset                                         |
+| Scikit-learn | 1.x     | Perhitungan Accuracy, Precision, Recall, F1-Score, dan AUC |
+| Matplotlib   | 3.x     | Visualisasi grafik hasil pelatihan                         |
 
 ---
 
 ## Latihan 2 — Repeatability Test Plan
 
-Rancang tes repeatability sederhana: jalankan kode yang sama 3× di environment yang sama.
+Rencana pengujian repeatability akan dilakukan menggunakan konfigurasi yang sama sebanyak tiga kali.
 
-| Run | Seed | Metrik Utama | Hasil Sama? |
-|-----|------|-------------|-------------|
-| 1 | *Contoh: 42* | *Contoh: Accuracy* | — |
-| 2 | | | [ ] Ya / [ ] Tidak |
-| 3 | | | [ ] Ya / [ ] Tidak |
+| Run | Seed | Metrik Utama | Hasil Sama?  |
+| --- | ---- | ------------ | ------------ |
+| 1   | 42   | Accuracy     | Direncanakan |
+| 2   | 42   | Accuracy     | Direncanakan |
+| 3   | 42   | Accuracy     | Direncanakan |
 
 **Jika hasil berbeda, kemungkinan penyebab:**
 
-> Penyebab umum non-repeatability:
-> - **Thermal throttling** — CPU/GPU overheating pada run berturut-turut → clock speed turun → waktu eksekusi berubah
-> - **Background process** — antivirus scan, update OS, atau cloud sync aktif saat run berlangsung
-> - **Cache dari run sebelumnya** — hasil tersimpan di memori/disk sehingga run berikutnya tidak menjalankan komputasi penuh
-> - **Random state tidak dikontrol di semua level** — Python seed di-set, tapi NumPy/PyTorch/TensorFlow punya seed independen
+* Random seed belum diterapkan pada seluruh proses pelatihan.
+* GPU Google Colab yang digunakan berbeda.
+* Dataset diproses dengan urutan yang berbeda.
+* Perbedaan versi library yang digunakan.
+* Konfigurasi eksperimen berubah.
 
-___________________________________________________
+### Checklist kontrol yang direncanakan
 
-**Checklist kontrol yang sudah diterapkan:**
-- [ ] Random seed di-set di semua level
-- [ ] Tidak ada background process yang mengganggu
-- [ ] Cache dibersihkan antar-run
-- [ ] Config file yang sama untuk semua run
+* [x] Random seed akan ditetapkan pada seluruh proses.
+* [x] Tidak akan menjalankan proses lain yang mengganggu eksperimen.
+* [x] Cache akan dibersihkan sebelum setiap pengujian.
+* [x] Config file yang sama akan digunakan pada setiap run.
 
 ---
 
 ## Latihan 3 — README Eksperimen
 
-Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
-
 ```
-# Judul Eksperimen: ____________________
+# Judul Eksperimen
+
+Pengaruh Variasi Ukuran Input Citra dan Jumlah Epoch terhadap Performa Model EfficientNet-B6 untuk Klasifikasi Penyakit Daun Padi
 
 ## 1. Environment
-> (Salin spesifikasi dari Latihan 1)
+
+Google Colab
+Python 3.11
+TensorFlow 2.x
+GPU NVIDIA Tesla T4 (atau GPU yang tersedia)
 
 ## 2. Installation
-> (Langkah instalasi, misal: "pip install -r requirements.txt")
+
+pip install tensorflow
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install scikit-learn
 
 ## 3. Data
-> (Deskripsi data: sumber, format, ukuran)
+
+Dataset Rice Leafs
+Jumlah data : 3.355 citra
+Jumlah kelas : 4
+
+- Healthy
+- Leaf Blast
+- Hispa
+- Brown Spot
 
 ## 4. Execution
-> (Command untuk menjalankan eksperimen)
+
+Eksperimen direncanakan dijalankan menggunakan Google Colab mulai dari proses import library, preprocessing dataset, pelatihan model EfficientNet-B6, hingga evaluasi model.
 
 ## 5. Configuration
-> (File config yang digunakan + parameter kunci)
+
+Model : EfficientNet-B6
+
+Input Size :
+- 224 × 224
+- 528 × 528
+
+Epoch :
+- 25
+- 50
+
+Validation :
+5-Fold Cross Validation
+
+Optimizer :
+Adam
+
+Batch Size :
+32
+
+Random Seed :
+42
 
 ## 6. Expected Output
-> (Contoh output yang diharapkan + format)
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- AUC
+- Confusion Matrix
+- ROC Curve
+- Grafik Accuracy
+- Grafik Loss
 ```
 
 ---
@@ -189,6 +256,15 @@ Tulis README minimum untuk eksperimen Anda (6 komponen wajib).
 
 > Apakah eksperimen Anda saat ini bisa direproduksi oleh orang lain tanpa bantuan Anda? Komponen apa yang masih hilang?
 
-**Level saat ini:** [ ] Repeatability / [ ] Reproducibility / [ ] Belum keduanya
+**Level saat ini:**
+
+* [ ] Repeatability
+* [ ] Reproducibility
+* [x] Belum keduanya
+
+**Komponen yang belum terdokumentasi:**
+
+Penelitian masih berada pada tahap persiapan implementasi. Dokumentasi environment, konfigurasi eksperimen, serta README telah direncanakan. Setelah eksperimen selesai dilakukan, dokumentasi akan diperbarui dengan versi library yang digunakan, notebook Google Colab, file requirements.txt, hasil pengujian repeatability, dan output eksperimen sehingga penelitian dapat direproduksi oleh peneliti lain.
+roducibility / [ ] Belum keduanya
 **Komponen yang belum terdokumentasi:**
 > ___________________________________________________
