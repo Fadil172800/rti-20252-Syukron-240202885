@@ -75,7 +75,7 @@ Tanggal          : 23 April 2026
 3. Identifikasi distorsi:
    - Asumsi tersembunyi: Dataset sekunder (Kaggle) dengan latar belakang seragam dianggap mewakili variasi visual riil daun padi di area persawahan terbuka.
    - Sumber bias potensial: Ketidakseimbangan data (imbalanced class) di mana jumlah citra daun sehat jauh mendominasi dibanding citra daun sakit.
-   - Langkah mitigasi: Melakukan evaluasi performa menggunakan metrik F1-Score dan AUC (bukan hanya akurasi) serta menerapkan teknik penyeimbangan data.
+   - Langkah mitigasi: Melakukan evaluasi menggunakan Accuracy, Precision, Recall, F1-Score, dan AUC sehingga performa model pada setiap kelas dapat dianalisis         secara lebih menyeluruh dibanding hanya menggunakan nilai akurasi.
 
 4. Komitmen etika:
    - Data yang tidak akan dimanipulasi: Hasil akurasi dari setiap fold pengujian, termasuk fold dengan performa rendah (seperti fold 2 yang hanya berkisar ~71%).
