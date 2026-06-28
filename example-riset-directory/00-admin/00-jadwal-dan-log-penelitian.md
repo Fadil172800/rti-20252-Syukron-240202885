@@ -1,49 +1,48 @@
 # Jadwal & Log Pelaksanaan Penelitian
 
-Catatan kronologis pelaksanaan tiap tahap penelitian (sumber: riwayat commit GitHub & dokumen `09-docs/tahap-N-*.md`). Tanggal mengikuti `git log`.
+Catatan kronologis pelaksanaan penelitian klasifikasi penyakit daun padi menggunakan Transfer Learning EfficientNet-B6.
 
 ## Log Pelaksanaan
 
-| Tanggal                    | Tahap   | Aktivitas                                                                                                                                                                        | Referensi                                                                                                                               |
-| -------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-06-27                 | Tahap 1 | Finalisasi judul penelitian, penyusunan proposal penelitian, penyempurnaan Research Question (RQ), hipotesis, variabel penelitian, serta pembuatan repository GitHub penelitian. | [01-proposal/Proposal_Penelitian_EfficientNet_B6_Revisi.docx](../01-proposal/)                                                          |
-| 2026-06-28                 | Tahap 2 | Studi literatur mengenai Artificial Intelligence, Deep Learning, CNN, EfficientNet-B6, serta klasifikasi penyakit daun padi. Pengumpulan referensi jurnal pendukung penelitian.  | [02-literatur/](../02-literatur/), [09-docs/tahap-2-studi-literatur.md](../09-docs/tahap-2-studi-literatur.md)                          |
-| 2026-06-29                 | Tahap 2 | Penyusunan landasan teori mengenai Deep Learning, CNN, EfficientNet-B6, TensorFlow, Google Colab, dan dataset Rice Leafs.                                                        | [03-teori/](../03-teori/), [09-docs/tahap-2-landasan-teori.md](../09-docs/tahap-2-landasan-teori.md)                                    |
-| 2026-06-30                 | Tahap 3 | Persiapan lingkungan penelitian menggunakan Google Colab, Google Drive, GitHub, instalasi library Python, serta identifikasi dataset Rice Leafs dari Kaggle.                     | [04-data/](../04-data/), [05-kode/](../05-kode/), [09-docs/tahap-3-persiapan-lingkungan.md](../09-docs/tahap-3-persiapan-lingkungan.md) |
-| 2026-07-01                 | Tahap 3 | Persiapan dataset penelitian, dokumentasi sumber dataset, serta penyusunan struktur folder penelitian.                                                                           | [04-data/README.md](../04-data/README.md), [09-docs/tahap-3-persiapan-dataset.md](../09-docs/tahap-3-persiapan-dataset.md)              |
-| 2026-07-02                 | Tahap 3 | Implementasi preprocessing dataset meliputi resize citra, normalisasi, pembagian data training-testing (80:20), dan konfigurasi 5-Fold Cross Validation.                         | [05-kode/preprocessing.ipynb](../05-kode/preprocessing.ipynb), [09-docs/tahap-3-preprocessing.md](../09-docs/tahap-3-preprocessing.md)  |
-| 2026-07-03                 | Tahap 4 | Implementasi model EfficientNet-B6 serta konfigurasi empat skenario eksperimen berdasarkan variasi ukuran input citra dan jumlah epoch.                                          | [05-kode/training.ipynb](../05-kode/training.ipynb), [09-docs/tahap-4-training-model.md](../09-docs/tahap-4-training-model.md)          |
-| 2026-07-04 s.d. 2026-07-07 | Tahap 4 | Pelaksanaan eksperimen empat skenario menggunakan EfficientNet-B6 pada Google Colab serta penyimpanan model hasil pelatihan.                                                     | [05-kode/](../05-kode/), [06-output/](../06-output/), [09-docs/tahap-4-eksperimen.md](../09-docs/tahap-4-eksperimen.md)                 |
-| 2026-07-08                 | Tahap 5 | Evaluasi model menggunakan Accuracy, Precision, Recall, F1-Score, AUC, Confusion Matrix, dan ROC Curve.                                                                          | [06-output/](../06-output/), [09-docs/tahap-5-evaluasi.md](../09-docs/tahap-5-evaluasi.md)                                              |
-| 2026-07-09                 | Tahap 5 | Analisis hasil eksperimen, pembahasan pengaruh ukuran input citra dan jumlah epoch, serta pengujian hipotesis penelitian.                                                        | [07-manuskrip/](../07-manuskrip/), [08-laporan/](../08-laporan/), [09-docs/tahap-5-analisis.md](../09-docs/tahap-5-analisis.md)         |
-| 2026-07-10                 | Tahap 5 | Finalisasi laporan penelitian, pemeriksaan akhir dokumen, dan persiapan submit repository GitHub penelitian.                                                                     | [08-laporan/](../08-laporan/), [09-docs/](../09-docs/)                                                                                  |
+| Tanggal    | Tahap   | Aktivitas                                                                                                                       | Referensi                                      | Status |
+| ---------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | ------ |
+| 2026-06-23 | Tahap 1 | Menentukan topik penelitian dan melakukan diskusi awal mengenai metode EfficientNet-B6.                                         | `01-proposal/`, `00-admin/identitas-proyek.md` | ✓      |
+| 2026-06-24 | Tahap 1 | Menyusun judul penelitian, tujuan penelitian, ruang lingkup penelitian, dan proposal awal.                                      | `01-proposal/`                                 | ✓      |
+| 2026-06-25 | Tahap 1 | Membuat struktur repository GitHub serta dokumentasi administrasi penelitian.                                                   | `00-admin/`, `README.md`                       | ✓      |
+| 2026-06-26 | Tahap 2 | Mengumpulkan referensi jurnal mengenai Deep Learning, CNN, Transfer Learning, EfficientNet, dan klasifikasi penyakit daun padi. | `02-literatur/`                                | ✓      |
+| 2026-06-27 | Tahap 2 | Menyusun landasan teori berdasarkan referensi yang telah dikumpulkan.                                                           | `03-teori/`                                    | ✓      |
+| 2026-06-28 | Tahap 3 | Menyiapkan lingkungan penelitian menggunakan Google Colab, TensorFlow, serta mengunduh dataset Rice Leaf Disease dari Kaggle.   | `04-data/`, `05-kode/`                         | ✓      |
+| 2026-06-29 | Tahap 3 | Melakukan preprocessing dataset, pembagian data training-validation (80:20), dan pembuatan pipeline dataset.                    | `05-kode/`, `04-data/README.md`                | ✓      |
+| 2026-06-30 | Tahap 4 | Membangun model EfficientNet-B6 menggunakan Transfer Learning dan menyusun arsitektur model.                                    | `05-kode/RiceLeaf_EfficientNet_B6_Final.ipynb` | ✓      |
+| 2026-07-01 | Tahap 4 | Melatih model menggunakan Google Colab, menerapkan EarlyStopping, ModelCheckpoint, dan ReduceLROnPlateau.                       | `05-kode/`, `06-output/model/`                 | ✓      |
+| 2026-07-02 | Tahap 5 | Melakukan evaluasi model menggunakan Accuracy, Precision, Recall, F1-Score, Confusion Matrix, dan Classification Report.        | `06-output/metrics/`, `06-output/figures/`     | ✓      |
+| 2026-07-03 | Tahap 5 | Menyimpan model, hasil evaluasi, grafik pelatihan, serta menyusun dokumentasi penelitian.                                       | `06-output/`, `07-manuskrip/`, `08-laporan/`   | ✓      |
 
 ## Status Ringkas
 
-* **Tahap 1**: Selesai (Proposal penelitian dan repository GitHub selesai disiapkan).
-* **Tahap 2**: Terjadwal (Studi literatur dan penyusunan landasan teori).
-* **Tahap 3**: Terjadwal (Persiapan lingkungan penelitian, dataset, dan preprocessing).
-* **Tahap 4**: Terjadwal (Implementasi dan eksperimen EfficientNet-B6).
-* **Tahap 5**: Terjadwal (Evaluasi model, analisis hasil, dan penyusunan laporan).
+* **Tahap 1** : Selesai
+* **Tahap 2** : Selesai
+* **Tahap 3** : Selesai
+* **Tahap 4** : Selesai
+* **Tahap 5** : Selesai
 
-## Item Tindak Lanjut (Checklist Sebelum Submission)
+## Item Tindak Lanjut
 
 * [x] Menentukan judul penelitian
 * [x] Menyusun proposal penelitian
-* [x] Membuat repository GitHub penelitian
-* [ ] Melengkapi studi literatur
-* [ ] Menyusun landasan teori
-* [ ] Menyiapkan Google Colab
-* [ ] Menentukan dataset Rice Leafs dari Kaggle
-* [ ] Melakukan preprocessing dataset
-* [ ] Implementasi model EfficientNet-B6
-* [ ] Menjalankan empat skenario eksperimen
-* [ ] Melakukan evaluasi model
-* [ ] Analisis hasil penelitian
-* [ ] Penyusunan naskah penelitian
+* [x] Membuat repository GitHub
+* [x] Mengumpulkan studi literatur
+* [x] Menyusun landasan teori
+* [x] Menyiapkan Google Colab
+* [x] Menentukan dataset Rice Leaf Disease
+* [x] Melakukan preprocessing dataset
+* [x] Implementasi EfficientNet-B6
+* [x] Melatih model
+* [x] Melakukan evaluasi model
+* [x] Menyimpan model hasil penelitian
 * [ ] Finalisasi laporan penelitian
-* [ ] Review akhir seluruh dokumen sebelum submission
+* [ ] Review akhir sebelum submission
 
 ## Korespondensi
 
-*(Belum ada. Tambahkan catatan bimbingan dengan dosen pembimbing atau korespondensi lain apabila sudah tersedia.)*
+Belum ada catatan bimbingan yang didokumentasikan.
