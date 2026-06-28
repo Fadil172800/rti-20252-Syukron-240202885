@@ -1,0 +1,184 @@
+# 02-literatur
+
+Kumpulan referensi ilmiah yang digunakan sebagai dasar penyusunan tinjauan pustaka pada penelitian **Klasifikasi Penyakit Daun Padi Menggunakan Transfer Learning EfficientNet-B6**.
+
+---
+
+## Topik Referensi yang Relevan
+
+Referensi yang dikumpulkan pada penelitian ini meliputi beberapa topik berikut.
+
+### Artificial Intelligence
+- Konsep Artificial Intelligence
+- Perkembangan AI di bidang pertanian
+
+### Machine Learning
+- Konsep Machine Learning
+- Supervised Learning
+- Image Classification
+
+### Deep Learning
+- Konsep Deep Learning
+- Neural Network
+- Transfer Learning
+
+### Convolutional Neural Network (CNN)
+- Arsitektur CNN
+- Feature Extraction
+- Pooling Layer
+- Fully Connected Layer
+- Softmax Classifier
+
+### EfficientNet
+- EfficientNet
+- Compound Scaling
+- EfficientNet-B0 sampai EfficientNet-B7
+- EfficientNet-B6
+
+### Computer Vision
+- Image Processing
+- Image Classification
+- Object Recognition
+
+### TensorFlow & Keras
+- TensorFlow Framework
+- Keras API
+- Model Training
+- Model Evaluation
+
+### Rice Leaf Disease
+- BrownSpot
+- Healthy
+- Hispa
+- LeafBlast
+
+### Dataset
+- Rice Leaf Disease Dataset
+- Kaggle Rice Leafs Dataset
+- Data Preprocessing
+- Image Resizing
+- Normalization
+
+### Evaluasi Model
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- Confusion Matrix
+- Classification Report
+- ROC Curve (Referensi)
+- AUC (Referensi)
+
+---
+
+## Referensi Utama
+
+1. Milano, A. C., Yasid, A., & Wahyuningrum, R. T.
+   **Klasifikasi Penyakit Daun Padi Menggunakan Model Deep Learning EfficientNet-B6.**
+   JITET (Jurnal Informatika dan Teknik Elektro Terapan), Vol.12 No.1, 2024.
+
+---
+
+## Referensi Pendukung yang Direkomendasikan
+
+### Dasar Artificial Intelligence
+
+1. Stuart Russell & Peter Norvig
+   Artificial Intelligence: A Modern Approach.
+
+---
+
+### Machine Learning
+
+2. Tom M. Mitchell
+   Machine Learning.
+
+3. Aurélien Géron
+   Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow.
+
+---
+
+### Deep Learning
+
+4. Ian Goodfellow, Yoshua Bengio, Aaron Courville
+   Deep Learning.
+
+---
+
+### CNN
+
+5. Yann LeCun et al.
+   Gradient-Based Learning Applied to Document Recognition.
+
+6. Alex Krizhevsky et al.
+   ImageNet Classification with Deep Convolutional Neural Networks.
+
+---
+
+### EfficientNet
+
+7. Mingxing Tan & Quoc V. Le
+   EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks.
+
+8. Plant Leaf Disease Classification using EfficientNet Deep Learning Model.
+
+9. Classification of Beans Leaf Diseases using Fine Tuned CNN Model.
+
+10. Evaluation of Diverse Convolutional Neural Networks and Training Strategies for Wheat Leaf Disease Identification.
+
+11. Deep Learning untuk Klasifikasi Glaukoma menggunakan EfficientNet.
+
+---
+
+### Rice Leaf Disease
+
+12. Implementasi Deep Learning pada Sistem Klasifikasi Hama Tanaman Padi Menggunakan CNN.
+
+13. Deteksi Penyakit Pada Daun Tanaman Padi Menggunakan Convolutional Neural Network.
+
+14. Klasifikasi Penyakit Daun Padi menggunakan Random Forest dan Color Histogram.
+
+15. Diagnosis Penyakit Tanaman Padi Menggunakan Metode PROMETHEE.
+
+---
+
+### TensorFlow
+
+16. TensorFlow Official Documentation.
+
+17. Keras Official Documentation.
+
+---
+
+### Computer Vision
+
+18. Digital Image Processing – Rafael C. Gonzalez.
+
+19. Computer Vision: Algorithms and Applications – Richard Szeliski.
+
+---
+
+## Isi yang Diharapkan
+
+Folder ini diharapkan berisi:
+
+- PDF jurnal utama
+- PDF jurnal pendukung
+- Buku elektronik (ebook)
+- Ringkasan setiap jurnal
+- Catatan hasil telaah pustaka
+- Matriks literatur
+- Daftar pustaka BibTeX (.bib)
+- Daftar pustaka RIS (.ris)
+- Sitasi Mendeley
+
+---
+
+## Berkas
+
+- jurnal-utama.pdf
+- jurnal-pendukung/
+- matriks-literatur.md
+- ringkasan-jurnal.md
+- daftar-pustaka.bib
+- daftar-pustaka.ris
