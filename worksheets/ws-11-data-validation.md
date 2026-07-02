@@ -66,30 +66,47 @@ Jika gagal di langkah awal → tidak perlu lanjut.
 DATA VALIDATION CHECKLIST
 
 Completeness:
-  [ ] Semua skenario tercakup
-  [ ] Jumlah run sesuai rencana
-  [ ] Tidak ada file output hilang
-  Missing: ____ dari ____ data points
+
+☑ Semua skenario tercakup
+
+☑ Jumlah run sesuai rencana
+
+☑ Tidak ada file output hilang
+
+Missing: 0 dari 1 data eksperimen
 
 Format Consistency:
-  [ ] Semua file format sama (CSV/JSON/...)
-  [ ] Header konsisten
-  [ ] Tipe data konsisten (numerik tetap numerik)
+
+☑ Semua file menggunakan format yang sama (CSV)
+
+☑ Header konsisten
+
+☑ Tipe data konsisten (numerik)
 
 Range & Logic:
-  [ ] Nilai dalam range masuk akal
-  [ ] Tidak ada waktu negatif
-  [ ] Metrik 0–100%, tidak di luar range
-  Anomali ditemukan: ____________________
+
+☑ Nilai berada pada rentang yang masuk akal
+
+☑ Tidak ada waktu negatif
+
+☑ Metrik berada pada rentang 0–1
+
+Anomali ditemukan:
+Tidak ditemukan anomali yang memengaruhi hasil penelitian.
 
 Cross-Validation:
-  [ ] Run identik → hasil mendekati
-  [ ] Trend konsisten dengan ekspektasi teori
+
+☑ Hasil evaluasi sesuai dengan konfigurasi eksperimen
+
+☑ Trend hasil sesuai dengan rancangan penelitian
 
 Keputusan:
-  [ ] Data siap analisis
-  [ ] Perlu cleaning
-  [ ] Perlu re-run (skenario: ____)
+
+☑ Data siap dianalisis
+
+☐ Perlu cleaning
+
+☐ Perlu re-run (skenario: -)
 ```
 
 ---
@@ -98,17 +115,15 @@ Keputusan:
 
 Verifikasi apakah semua data yang direncanakan sudah terkumpul.
 
-| Skenario | Run Direncanakan | Run Tercatat | Missing | Alasan |
-|----------|-----------------|-------------|---------|--------|
-| *Contoh: BERT, DS-1* | *10* | *10* | *0* | *—* |
-| *LSTM, DS-3* | *10* | *8* | *2* | *OOM pada run 7 & 9* |
-| | | | | |
-| | | | | |
+| Skenario                          | Run Direncanakan | Run Tercatat | Missing | Alasan |
+| --------------------------------- | ---------------- | ------------ | ------- | ------ |
+| EfficientNet-B6 Transfer Learning | 1                | 1            | 0       | -      |
 
-**Total expected:** ____ | **Total actual:** ____ | **Missing:** ____
+
+**Total expected:** 1 | **Total actual:** 1 | **Missing:** 0
 
 **Keputusan untuk data missing:**
-> ___________________________________________________
+> Seluruh data eksperimen berhasil diperoleh sesuai dengan rencana. Tidak terdapat data yang hilang sehingga seluruh hasil dapat digunakan pada proses analisis.
 
 ---
 
@@ -118,25 +133,25 @@ Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 
 **Dataset sampel (atau data Anda sendiri):**
 
-| Run | Accuracy (%) |
-|-----|-------------|
-| 1 | *91.2* |
-| 2 | *90.8* |
-| 3 | *91.5* |
-| 4 | *78.3* |
-| 5 | *91.0* |
+| Metrik    | Nilai  |
+| --------- | ------ |
+| Accuracy  | 0.6304 |
+| Precision | 0.5876 |
+| Recall    | 0.6304 |
+| F1-Score  | 0.5845 |
 
 **Deteksi outlier:**
-- Q1 = ____ | Q3 = ____ | IQR = ____
-- Batas bawah (Q1 - 1.5×IQR) = ____
-- Batas atas (Q3 + 1.5×IQR) = ____
-- Outlier terdeteksi: ____
+- Q1 = Tidak dapat dihitung (jumlah observasi tidak mencukupi)
+- Q3 = Tidak dapat dihitung
+- IQR = Tidak dapat dihitung
+- Outlier = Tidak ditemukan
 
 **Investigasi (untuk setiap outlier):**
 
-| Outlier | Nilai | Kemungkinan Penyebab | Keputusan |
-|---------|-------|---------------------|-----------|
-| *Run 4* | *78.3* | *Contoh: thermal throttling setelah 3 run berturut* | *Re-run dengan cooling interval* |
+| Outlier   | Nilai | Kemungkinan Penyebab | Keputusan                 |
+| --------- | ----- | -------------------- | ------------------------- |
+| Tidak ada | -     | -                    | Tidak diperlukan tindakan |
+
 
 ---
 
@@ -144,12 +159,33 @@ Periksa data Anda untuk anomali. Gunakan metode IQR atau z-score.
 
 Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
-**1. Completeness:** ____% data terkumpul
-**2. Format:** [ ] Konsisten / [ ] Ada inkonsistensi: ____
-**3. Range check (anomali):** ____
-**4. Logic check:** [ ] Parameter sesuai plan / [ ] Ada ketidaksesuaian: ____
+1. Completeness
 
-**Kesimpulan:** [ ] Data siap analisis / [ ] Perlu tindakan: ____
+100% data eksperimen berhasil dikumpulkan sesuai dengan rencana.
+
+2. Format
+
+[✓] Konsisten
+
+Seluruh file hasil menggunakan format CSV serta memiliki struktur data yang konsisten.
+
+3. Range Check
+
+Seluruh metrik evaluasi (Accuracy, Precision, Recall, dan F1-Score) berada pada rentang nilai yang valid yaitu 0–1.
+
+Tidak ditemukan nilai yang berada di luar batas logis.
+
+4. Logic Check
+
+[✓] Parameter sesuai rencana eksperimen
+
+Konfigurasi model, ukuran input, jumlah epoch, batch size, optimizer, serta random seed sesuai dengan konfigurasi yang telah ditetapkan sebelum eksperimen dilaksanakan.
+
+Kesimpulan
+
+[✓] Data siap dianalisis
+
+Seluruh data hasil eksperimen telah memenuhi aspek completeness, consistency, validity, dan accuracy sehingga layak digunakan pada tahap analisis hasil penelitian.
 
 ---
 
@@ -157,5 +193,4 @@ Buat laporan validasi ringkas untuk dataset eksperimen Anda.
 
 > Apa perbedaan antara "data yang benar" dan "data yang dipercaya"? Mengapa proses validasi formal diperlukan meskipun data dikumpulkan secara otomatis?
 
-> ___________________________________________________
-> ___________________________________________________
+> Data yang benar adalah data yang berhasil diperoleh dari proses eksperimen sesuai dengan hasil komputasi sistem. Namun, data yang dipercaya merupakan data yang telah melalui proses validasi sehingga dapat dipastikan lengkap, konsisten, berada pada rentang nilai yang logis, dan sesuai dengan rancangan penelitian. Meskipun data dikumpulkan secara otomatis menggunakan Google Colab, proses validasi tetap diperlukan untuk memastikan tidak terjadi kesalahan akibat konfigurasi eksperimen, kerusakan file, inkonsistensi format, maupun kesalahan selama proses pelatihan dan evaluasi model. Dengan demikian, hasil penelitian menjadi lebih andal dan dapat dipertanggungjawabkan secara ilmiah.
