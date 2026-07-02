@@ -77,35 +77,69 @@ Hipotesis yang ditolak adalah **temuan yang berharga**:
 ```
 ANALYSIS & INTERPRETATION
 
-1. Statistik Deskriptif:
-   | Skenario | Mean | Std | Median | Min | Max | n |
-   |----------|------|-----|--------|-----|-----|---|
-   |          |      |     |        |     |     |   |
+1. Statistik Deskriptif
 
-2. Uji Hipotesis:
-   Uji yang digunakan  : ____________________
-   Justifikasi          : ____________________
-   Hasil: p = ____, effect size (d/r/η²) = ____
-   CI 95%               : [____, ____]
+| Model | Accuracy | Precision | Recall | F1-Score | n |
+|--------|----------|-----------|--------|----------|---|
+| EfficientNet-B6 Transfer Learning | 63,04% | 58,76% | 63,04% | 58,45% | 671 |
 
-3. Keputusan:
-   [ ] H₀ ditolak → H₁ diterima
-   [ ] H₀ tidak ditolak
+2. Uji Hipotesis
 
-4. Interpretasi:
-   Hubungan ke RQ       : ____________________
-   Practical significance: ____________________
-   Perbandingan literatur: ____________________
+Uji yang digunakan :
+Analisis deskriptif
 
-5. Limitation:
-   | Jenis | Ancaman | Dampak | Mitigasi |
-   |-------|---------|--------|----------|
-   |       |         |        |          |
+Justifikasi :
+Penelitian ini hanya menggunakan satu konfigurasi model sehingga tidak terdapat kelompok pembanding yang memungkinkan dilakukan uji hipotesis inferensial.
 
-6. Failure Analysis (jika H₀ tidak ditolak):
-   Penyebab potensial  : ____________________
-   Boundary condition   : ____________________
-   Insight              : ____________________
+Hasil :
+Accuracy = 63,04%
+Precision = 58,76%
+Recall = 63,04%
+F1-Score = 58,45%
+
+Confidence Interval :
+Tidak dihitung.
+
+3. Keputusan
+
+[x] Hipotesis dievaluasi secara deskriptif
+
+[ ] H₀ ditolak
+
+[ ] H₀ tidak ditolak
+
+4. Interpretasi
+
+Hubungan ke Research Question :
+Model EfficientNet-B6 mampu melakukan klasifikasi penyakit daun padi menggunakan pendekatan transfer learning dan menghasilkan nilai accuracy sebesar 63,04%.
+
+Practical significance :
+Model dapat digunakan sebagai dasar sistem klasifikasi otomatis, namun performanya masih memiliki ruang untuk ditingkatkan terutama pada kelas minoritas.
+
+Perbandingan dengan literatur :
+Hasil penelitian lebih rendah dibandingkan penelitian Milano dkk. (2024) yang memperoleh akurasi sekitar 77%, kemungkinan dipengaruhi oleh penggunaan skema single split dan keterbatasan sumber daya Google Colab Free.
+
+5. Limitation
+
+| Jenis | Ancaman | Dampak | Mitigasi |
+|-------|----------|--------|----------|
+| Internal | Satu konfigurasi model | Tidak dapat membandingkan performa metode lain | Penelitian berikutnya dapat menggunakan beberapa konfigurasi model |
+| External | Dataset hanya Rice Leafs | Generalisasi terbatas | Menggunakan dataset lain pada penelitian lanjutan |
+| Statistical | Tidak ada multiple run | Tidak dapat menghitung variabilitas hasil | Melakukan repeatability test pada penelitian berikutnya |
+
+6. Failure Analysis
+
+Penyebab potensial :
+
+Performa model belum optimal pada kelas Hispa dan Leaf Blast karena jumlah data kedua kelas lebih sedikit dibandingkan kelas Healthy.
+
+Boundary condition :
+
+Pendekatan transfer learning dengan feature extraction pada lingkungan Google Colab Free masih memiliki keterbatasan dalam mencapai performa yang setara dengan penelitian yang menggunakan konfigurasi eksperimen lebih kompleks.
+
+Insight :
+
+Transfer learning menggunakan EfficientNet-B6 tetap mampu melakukan klasifikasi penyakit daun padi, namun peningkatan performa kemungkinan memerlukan fine-tuning, penanganan ketidakseimbangan data, atau sumber daya komputasi yang lebih tinggi.
 ```
 
 ---
@@ -114,15 +148,15 @@ ANALYSIS & INTERPRETATION
 
 Tentukan uji statistik yang tepat untuk eksperimen Anda.
 
-| Pertanyaan | Jawaban |
-|-----------|---------|
-| Berapa grup yang dibandingkan? | *Contoh: 3 (BERT, LSTM, SVM)* |
-| Apakah data berpasangan (paired)? | |
-| Apakah distribusi normal? (uji normalitas) | |
-| **Uji yang dipilih:** | |
-| **Justifikasi:** | |
+| Pertanyaan                        | Jawaban                                                                                                                                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Berapa grup yang dibandingkan?    | **1 (EfficientNet-B6 Transfer Learning)**                                                                                                                                                                                          |
+| Apakah data berpasangan (paired)? | Tidak                                                                                                                                                                                                                              |
+| Apakah distribusi normal?         | Tidak diuji karena hanya terdapat satu kelompok eksperimen                                                                                                                                                                         |
+| **Uji yang dipilih**              | Analisis deskriptif                                                                                                                                                                                                                |
+| **Justifikasi**                   | Penelitian hanya mengevaluasi satu konfigurasi model sehingga uji statistik inferensial seperti t-test atau ANOVA tidak relevan. Analisis dilakukan berdasarkan nilai Accuracy, Precision, Recall, F1-Score, dan Confusion Matrix. |
 
-**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [ ] Lainnya: ____
+**Effect size yang akan dilaporkan:** [ ] Cohen's d / [ ] Eta-squared / [V] Tidak dihitung (tidak terdapat kelompok pembanding)
 
 ---
 
@@ -131,20 +165,19 @@ Tentukan uji statistik yang tepat untuk eksperimen Anda.
 Gunakan data berikut (atau data riil Anda) untuk berlatih interpretasi.
 
 **Data:**
-| Model | Accuracy (mean ± std) | n |
-|-------|----------------------|---|
-| A | 89.2 ± 1.5 | 10 |
-| B | 87.8 ± 2.1 | 10 |
+| Model                             |   Accuracy |       n |
+| --------------------------------- | ---------: | ------: |
+| EfficientNet-B6 Transfer Learning | **63,04%** | **671** |
 
-p = 0.045, Cohen's d = 0.74, CI 95% = [0.03, 2.77]
 
-| Aspek | Interpretasi |
-|-------|-------------|
-| Signifikansi statistik | *Contoh: p < 0.05 → signifikan pada α=0.05* |
-| Effect size | *Contoh: d=0.74 → medium-to-large effect* |
-| Practical significance | |
-| Hubungan ke RQ | |
-| Perbandingan literatur | |
+
+| Aspek                         | Interpretasi                                                                                                                                                                                                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signifikansi statistik        | Tidak dilakukan uji signifikansi statistik karena penelitian hanya menggunakan satu konfigurasi model.                                                                                                                                                              |
+| Effect size                   | Tidak dihitung karena tidak terdapat kelompok pembanding.                                                                                                                                                                                                           |
+| Practical significance        | Model berhasil mengklasifikasikan empat kelas penyakit daun padi dengan accuracy 63,04%, sehingga menunjukkan bahwa EfficientNet-B6 dapat diterapkan untuk tugas klasifikasi, meskipun performa pada beberapa kelas masih perlu ditingkatkan.                       |
+| Hubungan ke Research Question | Hasil penelitian menjawab research question dengan menunjukkan performa model berdasarkan accuracy, precision, recall, F1-score, dan confusion matrix.                                                                                                              |
+| Perbandingan literatur        | Akurasi yang diperoleh lebih rendah dibandingkan penelitian Milano dkk. (2024). Perbedaan tersebut dapat dipengaruhi oleh penggunaan skema single split, konfigurasi pelatihan yang lebih sederhana, dan keterbatasan sumber daya komputasi pada Google Colab Free. |
 
 ---
 
@@ -154,20 +187,22 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 **Skenario:** Metode baru Anda mendapat F1 = 83.2%, baseline = 84.7%. p = 0.12 (tidak signifikan).
 
-| Pertanyaan | Jawaban |
-|-----------|---------|
-| Apakah ini "gagal"? | *Contoh: Bukan gagal total — hipotesis tidak terdukung adalah temuan yang valid dan bisa menjadi kontribusi.* |
-| Kemungkinan penyebab? | *Contoh: Metode baru menambah kompleksitas komputasi (+40% waktu) tanpa peningkatan F1 yang cukup — overhead tidak sebanding.* |
-| Boundary condition? | *Contoh: Metode ini hanya efektif ketika data ≥ 10.000 record; di dataset kecil (<1.000), baseline lebih stabil.* |
-| Insight yang bisa diambil? | *Contoh: Ada trade-off ukuran data vs kompleksitas — rekomendasikan hybrid approach yang adaptif berdasarkan ukuran dataset.* |
-| Apakah layak dilaporkan? Mengapa? | *Contoh: Ya — negative result + boundary condition analysis adalah kontribusi riset yang diakui komunitas (ex: ACL, SIGIR). Mencegah riset duplikasi yang berulang.* |
+| Pertanyaan                        | Jawaban                                                                                                                                                                                                                                             |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Apakah ini "gagal"?               | Tidak. Penelitian berhasil menghasilkan model klasifikasi dan memberikan evaluasi performa. Perbedaan hasil dengan penelitian acuan menjadi temuan yang dapat dianalisis lebih lanjut.                                                              |
+| Kemungkinan penyebab?             | Penggunaan feature extraction tanpa fine-tuning, keterbatasan komputasi Google Colab Free, serta distribusi data yang tidak seimbang antar kelas.                                                                                                   |
+| Boundary condition?               | Pendekatan ini sesuai untuk lingkungan komputasi terbatas, tetapi performanya dapat menurun dibandingkan konfigurasi yang menggunakan fine-tuning, validasi silang, atau sumber daya komputasi yang lebih besar.                                    |
+| Insight yang bisa diambil?        | EfficientNet-B6 tetap efektif sebagai model dasar klasifikasi penyakit daun padi, namun peningkatan performa dapat dicapai melalui fine-tuning, optimasi hiperparameter, atau strategi penanganan ketidakseimbangan kelas pada penelitian lanjutan. |
+| Apakah layak dilaporkan? Mengapa? | Ya. Hasil penelitian, termasuk keterbatasannya, merupakan bagian penting dari kontribusi ilmiah karena memberikan informasi mengenai performa model pada kondisi komputasi yang lebih sederhana dan realistis.                                      |
+
 
 **Limitation terkait:**
-| Jenis | Ancaman | Dampak |
-|-------|---------|--------|
-| *Contoh: Statistical* | *Contoh: Hanya 5 run per skenario* | *Power test rendah* |
-| | | |
-| | | |
+| Jenis       | Ancaman                       | Dampak                                                              |
+| ----------- | ----------------------------- | ------------------------------------------------------------------- |
+| Statistical | Hanya satu eksperimen utama   | Tidak dapat menghitung variasi hasil atau melakukan uji inferensial |
+| Internal    | Tidak menggunakan fine-tuning | Performa model belum optimal                                        |
+| External    | Dataset hanya Rice Leafs      | Generalisasi hasil masih terbatas                                   |
+
 
 ---
 
@@ -175,5 +210,4 @@ Latih kemampuan failure analysis: hipotesis TIDAK didukung. Apa yang bisa dipela
 
 > Apakah "failure" dalam riset benar-benar gagal, atau justru kontribusi? Bagaimana failure analysis mengubah cara Anda melihat hasil negatif?
 
-> ___________________________________________________
-> ___________________________________________________
+> Dalam penelitian, hasil yang tidak mencapai performa tertinggi bukan berarti penelitian gagal. Failure analysis membantu peneliti memahami faktor-faktor yang memengaruhi hasil eksperimen, seperti keterbatasan metode, konfigurasi model, maupun sumber daya komputasi. Dengan melakukan analisis terhadap keterbatasan tersebut, penelitian tetap memberikan kontribusi ilmiah karena dapat menjadi dasar perbaikan dan pengembangan pada penelitian selanjutnya.
