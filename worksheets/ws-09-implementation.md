@@ -79,45 +79,54 @@ Mengandalkan "install library terbaru" berbahaya: versi berbeda = perilaku berbe
 EXPERIMENT SETUP DOCUMENTATION
 
 Hardware:
-  CPU     : Intel Xeon (Google Colab Runtime)
-  RAM     : ±12 GB RAM
-  GPU     : NVIDIA Tesla T4 atau GPU yang tersedia pada Google Colab
-  Storage : Google Drive dan Google Colab Storage
+
+CPU     : Intel Xeon (Google Colab Runtime)
+RAM     : ±12 GB RAM
+GPU     : NVIDIA Tesla T4 atau GPU yang tersedia pada Google Colab
+Storage : Google Drive dan Google Colab Storage
 
 Software:
-  OS        : Linux (Ubuntu - Google Colab)
-  Runtime   : Python 3.11
-  Framework : TensorFlow 2.x, Keras
+
+OS        : Linux (Ubuntu - Google Colab)
+Runtime   : Python 3.11
+Framework : TensorFlow 2.x, Keras
 
 Dependencies:
 
-| Library        | Version | Sumber         | Hash/Checksum |
-|----------------|---------|----------------|---------------|
-| Python         | 3.11    | Google Colab   | Akan dibuat pada requirements.txt |
-| TensorFlow     | 2.x     | pip            | Akan dibuat pada requirements.txt |
-| NumPy          | 1.x     | pip            | Akan dibuat pada requirements.txt |
-| Pandas         | 2.x     | pip            | Akan dibuat pada requirements.txt |
-| Scikit-learn   | 1.x     | pip            | Akan dibuat pada requirements.txt |
-| Matplotlib     | 3.x     | pip            | Akan dibuat pada requirements.txt |
+| Library        | Version | Sumber | Hash/Checksum |
+|----------------|---------|--------|---------------|
+| Python         | 3.11    | Google Colab | Akan dibuat pada requirements.txt |
+| TensorFlow     | 2.x     | pip | Akan dibuat pada requirements.txt |
+| NumPy          | 1.x     | pip | Akan dibuat pada requirements.txt |
+| Pandas         | 2.x     | pip | Akan dibuat pada requirements.txt |
+| Scikit-learn   | 1.x     | pip | Akan dibuat pada requirements.txt |
+| Matplotlib     | 3.x     | pip | Akan dibuat pada requirements.txt |
+| OpenCV         | 4.x     | pip | Akan dibuat pada requirements.txt |
 
 Konfigurasi:
 
-  Config file     : config.ipynb (Google Colab Notebook)
-  Random seed     : 42
-  Hyperparameters :
-    - Model            : EfficientNet-B6
-    - Input Size       : 224×224 dan 528×528
-    - Epoch            : 25 dan 50
-    - Optimizer        : Adam
-    - Batch Size       : 32
-    - Validation       : 5-Fold Cross Validation
+Config file     : Google Colab Notebook (.ipynb)
 
-Reproducibility Check:
+Random seed     : 42
 
-  [x] Dependency akan didokumentasikan dalam requirements.txt / lock file
-  [x] Random seed direncanakan ditetapkan pada Python, NumPy, dan TensorFlow
-  [x] Config eksperimen akan disimpan pada repository GitHub
-  [x] README akan dilengkapi sebagai panduan reproduksi penelitian
+Hyperparameters :
+
+- Model            : EfficientNet-B6
+- Input Size       : 224 × 224
+- Epoch            : 25
+- Optimizer        : Adam
+- Batch Size       : 2
+- Validation       : Single Split (80% Training, 20% Validation)
+
+Reproducibility Check
+
+[x] Dependency akan didokumentasikan dalam requirements.txt
+
+[x] Random seed ditetapkan pada Python, NumPy, dan TensorFlow
+
+[x] Config eksperimen disimpan pada repository GitHub
+
+[x] README disediakan sebagai panduan reproduksi penelitian
 ```
 
 ---
@@ -126,26 +135,29 @@ Reproducibility Check:
 
 Dokumentasikan environment yang direncanakan untuk eksperimen.
 
-| Komponen    | Spesifikasi                                              |
-| ----------- | -------------------------------------------------------- |
-| CPU         | Intel Xeon (Google Colab Runtime)                        |
-| RAM         | ±12 GB RAM                                               |
-| GPU         | NVIDIA Tesla T4 atau GPU yang tersedia pada Google Colab |
-| OS          | Linux (Ubuntu - Google Colab)                            |
-| Runtime     | Python 3.11                                              |
-| Framework   | TensorFlow 2.x dan Keras                                 |
-| Random Seed | 42                                                       |
+| Komponen    | Spesifikasi                           |
+| ----------- | ------------------------------------- |
+| CPU         | Intel Xeon (Google Colab Runtime)     |
+| RAM         | ±12 GB RAM                            |
+| GPU         | NVIDIA Tesla T4 atau GPU Google Colab |
+| OS          | Linux (Ubuntu - Google Colab)         |
+| Runtime     | Python 3.11                           |
+| Framework   | TensorFlow 2.x dan Keras              |
+| Random Seed | 42                                    |
+
 
 ### Dependencies
 
-| Library      | Version | Alasan Dibutuhkan                                          |
-| ------------ | ------- | ---------------------------------------------------------- |
-| Python       | 3.11    | Bahasa pemrograman utama                                   |
-| TensorFlow   | 2.x     | Implementasi model EfficientNet-B6                         |
-| NumPy        | 1.x     | Operasi numerik                                            |
-| Pandas       | 2.x     | Pengolahan dataset                                         |
-| Scikit-learn | 1.x     | Perhitungan Accuracy, Precision, Recall, F1-Score, dan AUC |
-| Matplotlib   | 3.x     | Visualisasi grafik hasil pelatihan                         |
+| Library      | Version | Alasan Dibutuhkan                                                   |
+| ------------ | ------- | ------------------------------------------------------------------- |
+| Python       | 3.11    | Bahasa pemrograman utama                                            |
+| TensorFlow   | 2.x     | Implementasi model EfficientNet-B6                                  |
+| NumPy        | 1.x     | Operasi numerik                                                     |
+| Pandas       | 2.x     | Pengolahan dataset                                                  |
+| Scikit-learn | 1.x     | Perhitungan Accuracy, Precision, Recall, F1-Score, Confusion Matrix |
+| Matplotlib   | 3.x     | Visualisasi hasil pelatihan                                         |
+| OpenCV       | 4.x     | Membaca dan memproses citra                                         |
+
 
 ---
 
@@ -161,18 +173,18 @@ Rencana pengujian repeatability akan dilakukan menggunakan konfigurasi yang sama
 
 **Jika hasil berbeda, kemungkinan penyebab:**
 
-* Random seed belum diterapkan pada seluruh proses pelatihan.
 * GPU Google Colab yang digunakan berbeda.
-* Dataset diproses dengan urutan yang berbeda.
-* Perbedaan versi library yang digunakan.
-* Konfigurasi eksperimen berubah.
+* Operasi paralel TensorFlow tidak sepenuhnya deterministik.
+* Dataset diproses dalam urutan berbeda akibat proses shuffle.
+* Perbedaan versi library.
+* Perubahan konfigurasi eksperimen.
 
 ### Checklist kontrol yang direncanakan
 
-* [x] Random seed akan ditetapkan pada seluruh proses.
-* [x] Tidak akan menjalankan proses lain yang mengganggu eksperimen.
-* [x] Cache akan dibersihkan sebelum setiap pengujian.
-* [x] Config file yang sama akan digunakan pada setiap run.
+* ☑ Random seed ditetapkan pada Python, NumPy, dan TensorFlow.
+* ☑ Cache dibersihkan sebelum proses pelatihan.
+* ☑ Konfigurasi eksperimen yang sama digunakan pada setiap pengujian.
+* ☑ Dataset menggunakan pembagian data (train-validation split) yang sama.
 
 ---
 
@@ -181,13 +193,16 @@ Rencana pengujian repeatability akan dilakukan menggunakan konfigurasi yang sama
 ```
 # Judul Eksperimen
 
-Pengaruh Variasi Ukuran Input Citra dan Jumlah Epoch terhadap Performa Model EfficientNet-B6 untuk Klasifikasi Penyakit Daun Padi
+Klasifikasi Penyakit Daun Padi Menggunakan EfficientNet-B6 dengan Pendekatan Transfer Learning
 
 ## 1. Environment
 
 Google Colab
+
 Python 3.11
+
 TensorFlow 2.x
+
 GPU NVIDIA Tesla T4 (atau GPU yang tersedia)
 
 ## 2. Installation
@@ -197,57 +212,63 @@ pip install numpy
 pip install pandas
 pip install matplotlib
 pip install scikit-learn
+pip install opencv-python-headless
 
 ## 3. Data
 
 Dataset Rice Leafs
+
 Jumlah data : 3.355 citra
+
 Jumlah kelas : 4
 
-- Healthy
-- Leaf Blast
-- Hispa
 - Brown Spot
+- Healthy
+- Hispa
+- Leaf Blast
 
 ## 4. Execution
 
-Eksperimen direncanakan dijalankan menggunakan Google Colab mulai dari proses import library, preprocessing dataset, pelatihan model EfficientNet-B6, hingga evaluasi model.
+Eksperimen dijalankan menggunakan Google Colab mulai dari proses import library, preprocessing dataset, data augmentation, pembangunan model EfficientNet-B6, proses pelatihan menggunakan transfer learning, hingga evaluasi model.
 
 ## 5. Configuration
 
-Model : EfficientNet-B6
+Model :
+EfficientNet-B6
+
+Transfer Learning :
+Feature Extraction
 
 Input Size :
-- 224 × 224
-- 528 × 528
+224 × 224
 
 Epoch :
-- 25
-- 50
+25
+
+Batch Size :
+2
 
 Validation :
-5-Fold Cross Validation
+Single Split (80% Training, 20% Validation)
 
 Optimizer :
 Adam
 
-Batch Size :
-32
-
 Random Seed :
 42
 
-## 6. Expected Output
+## 6. Output
 
 - Accuracy
 - Precision
 - Recall
 - F1-Score
-- AUC
 - Confusion Matrix
-- ROC Curve
+- Classification Report
 - Grafik Accuracy
 - Grafik Loss
+- Model (.keras)
+- Model (.h5)
 ```
 
 ---
@@ -258,13 +279,13 @@ Random Seed :
 
 **Level saat ini:**
 
-* [ ] Repeatability
+* [☑] Repeatability
 * [ ] Reproducibility
-* [x] Belum keduanya
+* [ ] Belum keduanya
 
 **Komponen yang belum terdokumentasi:**
 
-Penelitian masih berada pada tahap persiapan implementasi. Dokumentasi environment, konfigurasi eksperimen, serta README telah direncanakan. Setelah eksperimen selesai dilakukan, dokumentasi akan diperbarui dengan versi library yang digunakan, notebook Google Colab, file requirements.txt, hasil pengujian repeatability, dan output eksperimen sehingga penelitian dapat direproduksi oleh peneliti lain.
+Eksperimen telah memiliki notebook Google Colab, konfigurasi model, dataset, serta parameter pelatihan yang terdokumentasi. Namun, penelitian masih perlu dilengkapi dengan file requirements.txt yang memuat versi seluruh library, dokumentasi versi TensorFlow dan Python yang digunakan saat pelatihan, serta README yang lebih rinci mengenai langkah reproduksi eksperimen. Dengan melengkapi komponen tersebut, penelitian akan lebih mudah direproduksi oleh peneliti lain pada lingkungan yang serupa.
 roducibility / [ ] Belum keduanya
 **Komponen yang belum terdokumentasi:**
 > ___________________________________________________
